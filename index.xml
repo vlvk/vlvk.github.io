@@ -5,10 +5,23 @@
     <link>https://vlvk.github.io/</link>
     <description>Recent content on On The Way</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 13 Nov 2018 21:54:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Nov 2018 14:01:15 +0800</lastBuildDate>
     
 	<atom:link href="https://vlvk.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Centos 配置备忘</title>
+      <link>https://vlvk.github.io/posts/centos-config/</link>
+      <pubDate>Tue, 20 Nov 2018 14:01:15 +0800</pubDate>
+      
+      <guid>https://vlvk.github.io/posts/centos-config/</guid>
+      <description>一、添加用户 // 添加用户 # adduser XXX // 附加至wheel组 # gpasswd -a XXX wheel  二、SSH配置 主要修改/etc/ssh/sshd_config文件
+1. 关闭root远程登录 PermitRootLogin no  2. 添加证书登录 // 生成密钥 ssh-keygen -t rsa // 至于自制的公钥数据就放置于用户家目录下的 .ssh/authorized_keys 内 RSAAuthentication yes PubkeyAuthentication yes  3. 禁用密码登陆 PasswordAuthentication yes -&amp;gt; no  三、Ssocks配置 1. 安装  Pip
+$ sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py  Ssocks
+$ sudo pip install shadowsocks  相关库
+$ sudo pip install M2Crypto $ sudo pip install gevent   2.</description>
+    </item>
     
     <item>
       <title>First Page</title>
