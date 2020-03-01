@@ -56,7 +56,7 @@ window.addEventListener("keydown", e => {
 	if (e.keyCode === 66) {
 		document.querySelector('.navigator').style.cssText = 'opacity: 1;';
 		setTimeout(() => {
-			location.href = 'bookmarks.html';
+			location.href = 'http://nav.templatesy.com/';
 		}, 1500);	
 	}
 });
