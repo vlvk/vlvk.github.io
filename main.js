@@ -18,28 +18,29 @@ const animate = (selector, csstext, delay) => {
 const cssShowup = 'top: 0px; opacity: 1;';
 const cssLeft = 'right: 0px; opacity: 1;';
 const cssRight = 'left: 0px; opacity: 1;';
+const delayValue = 300;
 
 const animateTitle = () => {
-	return Promise.all(animate("h1", cssShowup, 500));
+	return Promise.all(animate("h1", cssShowup, delayValue));
 }
 
 const animateSpan = () => {
-	const spanQueue = animate(".slogan > span:first-child", cssRight, 500);
-	spanQueue.push.apply(spanQueue, animate(".slogan > span:last-child", cssLeft, 500));
+	const spanQueue = animate(".slogan > span:first-child", cssRight, delayValue);
+	spanQueue.push.apply(spanQueue, animate(".slogan > span:last-child", cssLeft, delayValue));
 	return Promise.all(spanQueue);
 }
 
 const animateSlogan = () => {
-	return Promise.all(animate(".slogan > p", cssShowup, 500));
+	return Promise.all(animate(".slogan > p", cssShowup, delayValue));
 }
 
 const animateLink = () => {
-	return Promise.all(animate(".links > a", cssShowup, 500));
+	return Promise.all(animate(".links > a", cssShowup, delayValue));
 }
 
 const animateLocation = () => {
-	const leftLocation = animate(".location > span:first-child", cssRight, 500);
-	const rightLocation = animate(".location > span:last-child", cssLeft, 500);
+	const leftLocation = animate(".location > span:first-child", cssRight, delayValue);
+	const rightLocation = animate(".location > span:last-child", cssLeft, delayValue);
 	leftLocation.push.apply(leftLocation, rightLocation);
 	return Promise.all(leftLocation);
 }
