@@ -58,6 +58,7 @@ window.addEventListener("keydown", e => {
 		document.querySelector('.navigator').style.cssText = 'opacity: 1;';
 		setTimeout(() => {
 			location.href = 'https://vlvk.github.io/bookmarks.html';
-		}, 1500);	
+			document.querySelector('.navigator').style.cssText = 'opacity: 0;';
+		}, 1000);
 	}
 });
