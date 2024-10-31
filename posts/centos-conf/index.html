@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Centos 常见配置 :: VLVK&#39;s Blog</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Centos 安装后的一些常见配置" />
+<meta name="keywords" content=", " />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="/posts/centos-conf/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+<link rel="stylesheet" href="/terminal.css">
+
+
+
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Centos 常见配置">
+<meta property="og:description" content="Centos 安装后的一些常见配置" />
+<meta property="og:url" content="/posts/centos-conf/" />
+<meta property="og:site_name" content="VLVK&#39;s Blog" />
+
+  
+  
+  <meta property="og:image" content="/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-10-31 23:00:00 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    VLVK&#39;s Blog
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="/posts/centos-conf/">Centos 常见配置</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-10-31</time><span class="post-author">VLVK</span><span class="post-reading-time">1 min read (141 words)</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="/tags/linux/">Linux</a>&nbsp;
+      
+      #<a href="/tags/centos/">Centos</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h2 id="一添加用户">一、添加用户<a href="#一添加用户" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 添加用户</span>
+</span></span><span style="display:flex;"><span>adduser XXX
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 附加至wheel组</span>
+</span></span><span style="display:flex;"><span>gpasswd -a XXX wheel
+</span></span></code></pre></div><h2 id="二ssh配置">二、SSH配置<a href="#二ssh配置" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>主要修改<code>/etc/ssh/sshd_config</code>文件</p>
+<h3 id="1-关闭root远程登录">1. 关闭root远程登录<a href="#1-关闭root远程登录" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PermitRootLogin no
+</span></span></code></pre></div><h3 id="2-添加证书登录">2. 添加证书登录<a href="#2-添加证书登录" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>// 生成密钥
+</span></span><span style="display:flex;"><span>ssh-keygen -t rsa
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// 至于自制的公钥数据就放置于用户家目录下的 .ssh/authorized_keys 内
+</span></span><span style="display:flex;"><span>RSAAuthentication yes
+</span></span><span style="display:flex;"><span>PubkeyAuthentication yes
+</span></span></code></pre></div><h3 id="3-禁用密码登陆">3. 禁用密码登陆<a href="#3-禁用密码登陆" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PasswordAuthentication yes -&gt; no
+</span></span></code></pre></div><h2 id="三ssocks配置">三、Ssocks配置<a href="#三ssocks配置" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<h3 id="1-安装">1. 安装<a href="#1-安装" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<ul>
+<li>Pip</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+</span></span></code></pre></div><ul>
+<li>Ssocks</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo pip install shadowsocks
+</span></span></code></pre></div><ul>
+<li>相关库</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo pip install M2Crypto
+</span></span><span style="display:flex;"><span>$ sudo pip install gevent
+</span></span></code></pre></div><h3 id="2-添加相应配置文件">2. 添加相应配置文件<a href="#2-添加相应配置文件" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p><code>\etc\shadowsocks\example.json</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;server&#34;</span>:<span style="color:#e6db74">&#34;my_server_ip&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;server_port&#34;</span>:<span style="color:#ae81ff">8388</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;local_address&#34;</span>: <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;local_port&#34;</span>:<span style="color:#ae81ff">1080</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;password&#34;</span>:<span style="color:#e6db74">&#34;mypassword&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;timeout&#34;</span>:<span style="color:#ae81ff">300</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;method&#34;</span>:<span style="color:#e6db74">&#34;aes-256-cfb&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;fast_open&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;workers&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;prefer_ipv6&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-配置启动服务文件">3. 配置启动服务文件<a href="#3-配置启动服务文件" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p><code>\usr\lib\systemd\system\shadowsocks-server@.service</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Description<span style="color:#f92672">=</span>Shadowsocks Server Service
+</span></span><span style="display:flex;"><span>After<span style="color:#f92672">=</span>network.target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Type<span style="color:#f92672">=</span>simple
+</span></span><span style="display:flex;"><span>User<span style="color:#f92672">=</span>nobody
+</span></span><span style="display:flex;"><span>ExecStart<span style="color:#f92672">=</span>/usr/bin/ssserver -c /etc/shadowsocks/%i.json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>WantedBy<span style="color:#f92672">=</span>multi-user.target
+</span></span></code></pre></div><h3 id="4-开启服务">4. 开启服务<a href="#4-开启服务" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo systemctl start shadowsocks-server@example
+</span></span><span style="display:flex;"><span>$ sudo systemctl enable shadowsocks-server@example
+</span></span></code></pre></div><h2 id="四启动防火墙添加策略">四、启动防火墙，添加策略<a href="#四启动防火墙添加策略" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<h3 id="1-启动服务并在系统引导时启动该服务">1. 启动服务，并在系统引导时启动该服务：<a href="#1-启动服务并在系统引导时启动该服务" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo systemctl start firewalld
+</span></span><span style="display:flex;"><span>$ sudo systemctl enable firewalld
+</span></span></code></pre></div><h3 id="2-添加策略">2. 添加策略<a href="#2-添加策略" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>// SSH与SS端口
+</span></span><span style="display:flex;"><span>$ sudo firewall-cmd --zone<span style="color:#f92672">=</span>public --add-port<span style="color:#f92672">=</span>12345/tcp --permanent
+</span></span></code></pre></div><h3 id="3-重启防火墙">3. 重启防火墙<a href="#3-重启防火墙" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo firewall-cmd --reload
+</span></span></code></pre></div>
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+    
+    
+      <a href="/posts/react-hook/" class="button inline next">
+        React Hook 简单体验
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
