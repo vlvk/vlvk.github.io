@@ -6,133 +6,447 @@
     <description>Recent content in Posts on VLVK&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 31 Oct 2024 23:00:00 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Centos 常见配置</title>
-      <link>/posts/centos-conf/</link>
-      <pubDate>Thu, 31 Oct 2024 23:00:00 +0800</pubDate>
+      <title>【译】用中学数学理解大语言模型</title>
+      <link>/posts/understanding-llms-from-scratch-using-middle-school-math/</link>
+      <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>/posts/centos-conf/</guid>
-      <description>&lt;h2 id=&#34;一添加用户&#34;&gt;一、添加用户&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 添加用户&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adduser XXX
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 附加至wheel组&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gpasswd -a XXX wheel
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;二ssh配置&#34;&gt;二、SSH配置&lt;/h2&gt;
-&lt;p&gt;主要修改&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;文件&lt;/p&gt;
-&lt;h3 id=&#34;1-关闭root远程登录&#34;&gt;1. 关闭root远程登录&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PermitRootLogin no
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-添加证书登录&#34;&gt;2. 添加证书登录&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// 生成密钥
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ssh-keygen -t rsa
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// 至于自制的公钥数据就放置于用户家目录下的 .ssh/authorized_keys 内
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RSAAuthentication yes
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PubkeyAuthentication yes
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-禁用密码登陆&#34;&gt;3. 禁用密码登陆&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PasswordAuthentication yes -&amp;gt; no
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;三ssocks配置&#34;&gt;三、Ssocks配置&lt;/h2&gt;
-&lt;h3 id=&#34;1-安装&#34;&gt;1. 安装&lt;/h3&gt;
+      <guid>/posts/understanding-llms-from-scratch-using-middle-school-math/</guid>
+      <description>&lt;h2 id=&#34;0-序言&#34;&gt;0. 序言&lt;/h2&gt;
+&lt;p&gt;为了帮助更多人理解，本文将从零开始讲解大型语言模型（LLM）的工作原理，，不需额外知识储备，只需初中数学基础（比如加法与乘法）。本文包含理解 LLM 所需的全部知识和概念，旨在完全自给自足（不依赖其他外部资料）。我们首先将在纸上构建一个简单的生成式大语言模型，然后逐步剖析每一步细节，帮助你掌握现代人工智能语言模型（LLM）和 Transformer 架构。文中去掉了所有复杂术语和机器学习专业名词，简化为纯粹的数字乘法与加法表达。当然我们并没有舍弃细节，会在文中适当位置指出相关术语，以便你能与其他专业内容建立关联。&lt;/p&gt;
+&lt;p&gt;从加法和乘法到当今最先进的AI模型，意味着我们需要覆盖大量内容。本文不是对 LLM 的简化版解释——一个有决心的人理论上可以从这里提供的所有信息中重新创建一个现代的LLM。虽然我已经删去了一切不必要的字句，但整篇文章仍不适合快速浏览式地阅读。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;让我们开始吧！&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;首先需注意的是，神经网络只能接收数字作为输入，并输出数字。关键在于如何将一切输入内容（文字、图像、视频、声音）转换为数字，以及对神经网络的输出数字进行解释以达到目的。最后，我们自己构建一个神经网络，使其接收你提供的输入并给出你想要的输出（基于你选择的输出解码方式）。让我们逐步探讨从加法和乘法到像 &lt;a href=&#34;https://ai.meta.com/blog/meta-llama-3-1/&#34;&gt;Llama 3.1&lt;/a&gt; 这样的复杂模型的过程。&lt;/p&gt;
+&lt;h2 id=&#34;1-构建一个简单的神经网络&#34;&gt;1. 构建一个简单的神经网络&lt;/h2&gt;
+&lt;p&gt;先来搞清楚一个可以对物体进行分类的简单神经网络是怎样实现的，这是我们要设计的神经网络的任务背景：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Pip&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用颜色（RGB）和体积（毫升）来描述将被神经网络识别的物体&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;要求神经网络准确分辨出物体到底是：“叶子”还是“花朵”&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;Ssocks&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo pip install shadowsocks
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;相关库&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo pip install M2Crypto
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo pip install gevent
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-添加相应配置文件&#34;&gt;2. 添加相应配置文件&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;\etc\shadowsocks\example.json&lt;/code&gt;&lt;/p&gt;</description>
-      <content>&lt;h2 id=&#34;一添加用户&#34;&gt;一、添加用户&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 添加用户&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;adduser XXX
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 附加至wheel组&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gpasswd -a XXX wheel
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;二ssh配置&#34;&gt;二、SSH配置&lt;/h2&gt;
-&lt;p&gt;主要修改&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;文件&lt;/p&gt;
-&lt;h3 id=&#34;1-关闭root远程登录&#34;&gt;1. 关闭root远程登录&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PermitRootLogin no
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-添加证书登录&#34;&gt;2. 添加证书登录&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// 生成密钥
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ssh-keygen -t rsa
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// 至于自制的公钥数据就放置于用户家目录下的 .ssh/authorized_keys 内
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RSAAuthentication yes
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PubkeyAuthentication yes
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-禁用密码登陆&#34;&gt;3. 禁用密码登陆&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PasswordAuthentication yes -&amp;gt; no
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;三ssocks配置&#34;&gt;三、Ssocks配置&lt;/h2&gt;
-&lt;h3 id=&#34;1-安装&#34;&gt;1. 安装&lt;/h3&gt;
+&lt;p&gt;下图是用数字来代表“叶子”和“花朵”的示例：&lt;/p&gt;
+
+&lt;img src=&#34;pics/1.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;叶子的颜色由 RGB 值 (32, 107, 56) 表示，体积为 11.2 毫升。花朵的颜色由 RGB 值 (241, 200, 4) 表示，体积为 59.5 毫升。图中这些数据用于训练神经网络，让它学会根据“颜色”和“体积”来识别叶子和花朵。&lt;/p&gt;
+&lt;p&gt;现在我们就构建一个神经网络来完成这个分类任务。我们先确定输入/输出的格式和对输出结果的解释方式。上图中的叶子（Leaf）和花朵（Flower）已经用数字来表示了，所以可以直接传递给神经网络中的神经元。由于神经网络只能输出数字，因此我们还需要对神经网络输出的数字进行定义（即什么样的数字代表神经网络识别出的物体类型，是“叶子”还是“花朵”，因为神经网络本身无法直接输出“叶子”和“花朵”这两个名称来告诉我们分类结果）。因此，我们需要定义一个解释方案，将输出的数字对应到物体类别，以下是这里可使用的两种方案：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Pip&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果设计的神经网络只有一个输出神经元，可以通过正数或负数来代表识别出的物体类别。当该神经元输出正数时，我们就认为神经网络识别出该物体是“叶子”；如果输出的是负数，则表示识别出的物体是“花朵”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;另外，可以设计具有两个输出神经元的神经网络，用这两个神经元分别代表不同的物体类别。例如：约定第一个神经元代表“叶子”，第二个神经元代表“花朵”。当神经网络的第一个神经元输出的数字大于第二个神经元输出的数字时，我们就说神经网络识别出当前的物体是“叶子”；反之，当第一个神经元输出的数字小于第二个神经元输出的数字时，我们就说神经网络识别出的当前物体是“花朵”。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;Ssocks&lt;/li&gt;
+&lt;p&gt;这两种方案都可以让神经网络识别物体是“叶子”还是“花朵”。但本文我们选择第二种方案，因为它的结构更容易适应后面我们要讲解的内容。以下是根据第二种方案设计出来的神经网络。让我们详细分析它：&lt;/p&gt;
+
+&lt;img src=&#34;pics/2.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;图中的圆圈代表神经网络中的神经元，每一竖排代表网络的一层。所有的数据从第一层进入，然后逐层逐个做乘法和加法计算，经过隐藏层（三个神经元），最终到达输出层（两个神经元），我们根据最后一层的两个神经元输出的数值来预测当前识别出的是什么物体。注意图中的箭头和数字，以及它们之间的乘法与加法关系。&lt;/p&gt;
+&lt;p&gt;蓝色圆圈中的数值计算过程如下：&lt;/p&gt;
+&lt;p&gt;(32 * 0.10) + (107 * -0.29) + (56 * -0.07) + (11.2 * 0.46) = -26.6&lt;/p&gt;
+&lt;p&gt;名词释义：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;神经元/节点&lt;/em&gt;：带数字的圆圈&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;权重&lt;/em&gt;：箭头线上标注的数字&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;层&lt;/em&gt;：一组（竖排）神经元称为一层。可以将这个网络看作有三层：4个神经元的输入层、3个神经元的中间层和2个神经元的输出层。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo pip install shadowsocks
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;相关库&lt;/li&gt;
+&lt;p&gt;要计算网络的预测/输出（又称作“前向传播”），从左侧开始，把“叶子”代表的数字填入到第一层的神经元中。要前进到下一层，将圆圈中的数字与对应神经元的权重相乘并相加。图中演示了蓝色和橙色圆圈的计算。运行整个网络后，输出层第一个数字较大，因此我们可以解释为“网络将这些（RGB, Vol）值分类为叶子”。经过良好训练的网络可以处理各种（RGB, Vol）输入并正确分类物体。&lt;/p&gt;
+&lt;p&gt;这个神经网络模型本身对“叶子”、“花朵”或（RGB, Vol）没有任何概念（即它不理解“叶子”和“花朵”是什么）。它被设计出来只是为了接收4个数字并输出2个数字。我们规定4个输入数字代表物体的颜色值和体积，同时也规定2个输出神经元的值如何对应“叶子”和“花朵”。最终，网络的权重会通过训练过程自动调整得到，以确保模型能够接收输入数字并输出符合我们解释的结果。&lt;/p&gt;</description>
+      <content>&lt;h2 id=&#34;0-序言&#34;&gt;0. 序言&lt;/h2&gt;
+&lt;p&gt;为了帮助更多人理解，本文将从零开始讲解大型语言模型（LLM）的工作原理，，不需额外知识储备，只需初中数学基础（比如加法与乘法）。本文包含理解 LLM 所需的全部知识和概念，旨在完全自给自足（不依赖其他外部资料）。我们首先将在纸上构建一个简单的生成式大语言模型，然后逐步剖析每一步细节，帮助你掌握现代人工智能语言模型（LLM）和 Transformer 架构。文中去掉了所有复杂术语和机器学习专业名词，简化为纯粹的数字乘法与加法表达。当然我们并没有舍弃细节，会在文中适当位置指出相关术语，以便你能与其他专业内容建立关联。&lt;/p&gt;
+&lt;p&gt;从加法和乘法到当今最先进的AI模型，意味着我们需要覆盖大量内容。本文不是对 LLM 的简化版解释——一个有决心的人理论上可以从这里提供的所有信息中重新创建一个现代的LLM。虽然我已经删去了一切不必要的字句，但整篇文章仍不适合快速浏览式地阅读。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;让我们开始吧！&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;首先需注意的是，神经网络只能接收数字作为输入，并输出数字。关键在于如何将一切输入内容（文字、图像、视频、声音）转换为数字，以及对神经网络的输出数字进行解释以达到目的。最后，我们自己构建一个神经网络，使其接收你提供的输入并给出你想要的输出（基于你选择的输出解码方式）。让我们逐步探讨从加法和乘法到像 &lt;a href=&#34;https://ai.meta.com/blog/meta-llama-3-1/&#34;&gt;Llama 3.1&lt;/a&gt; 这样的复杂模型的过程。&lt;/p&gt;
+&lt;h2 id=&#34;1-构建一个简单的神经网络&#34;&gt;1. 构建一个简单的神经网络&lt;/h2&gt;
+&lt;p&gt;先来搞清楚一个可以对物体进行分类的简单神经网络是怎样实现的，这是我们要设计的神经网络的任务背景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;用颜色（RGB）和体积（毫升）来描述将被神经网络识别的物体&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;要求神经网络准确分辨出物体到底是：“叶子”还是“花朵”&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo pip install M2Crypto
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo pip install gevent
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-添加相应配置文件&#34;&gt;2. 添加相应配置文件&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;\etc\shadowsocks\example.json&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;server&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;my_server_ip&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;server_port&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;8388&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;local_address&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;127.0.0.1&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;local_port&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;1080&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mypassword&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;timeout&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;method&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;aes-256-cfb&amp;#34;&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;fast_open&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;workers&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;prefer_ipv6&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-配置启动服务文件&#34;&gt;3. 配置启动服务文件&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;\usr\lib\systemd\system\shadowsocks-server@.service&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Unit&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Description&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;Shadowsocks Server Service
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;After&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;network.target
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Service&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Type&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;simple
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;User&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;nobody
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ExecStart&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/bin/ssserver -c /etc/shadowsocks/%i.json
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Install&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;WantedBy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;multi-user.target
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;4-开启服务&#34;&gt;4. 开启服务&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo systemctl start shadowsocks-server@example
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo systemctl enable shadowsocks-server@example
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;四启动防火墙添加策略&#34;&gt;四、启动防火墙，添加策略&lt;/h2&gt;
-&lt;h3 id=&#34;1-启动服务并在系统引导时启动该服务&#34;&gt;1. 启动服务，并在系统引导时启动该服务：&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo systemctl start firewalld
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo systemctl enable firewalld
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-添加策略&#34;&gt;2. 添加策略&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;// SSH与SS端口
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo firewall-cmd --zone&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;public --add-port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;12345/tcp --permanent
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-重启防火墙&#34;&gt;3. 重启防火墙&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ sudo firewall-cmd --reload
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+&lt;p&gt;下图是用数字来代表“叶子”和“花朵”的示例：&lt;/p&gt;
+
+&lt;img src=&#34;pics/1.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;叶子的颜色由 RGB 值 (32, 107, 56) 表示，体积为 11.2 毫升。花朵的颜色由 RGB 值 (241, 200, 4) 表示，体积为 59.5 毫升。图中这些数据用于训练神经网络，让它学会根据“颜色”和“体积”来识别叶子和花朵。&lt;/p&gt;
+&lt;p&gt;现在我们就构建一个神经网络来完成这个分类任务。我们先确定输入/输出的格式和对输出结果的解释方式。上图中的叶子（Leaf）和花朵（Flower）已经用数字来表示了，所以可以直接传递给神经网络中的神经元。由于神经网络只能输出数字，因此我们还需要对神经网络输出的数字进行定义（即什么样的数字代表神经网络识别出的物体类型，是“叶子”还是“花朵”，因为神经网络本身无法直接输出“叶子”和“花朵”这两个名称来告诉我们分类结果）。因此，我们需要定义一个解释方案，将输出的数字对应到物体类别，以下是这里可使用的两种方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果设计的神经网络只有一个输出神经元，可以通过正数或负数来代表识别出的物体类别。当该神经元输出正数时，我们就认为神经网络识别出该物体是“叶子”；如果输出的是负数，则表示识别出的物体是“花朵”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;另外，可以设计具有两个输出神经元的神经网络，用这两个神经元分别代表不同的物体类别。例如：约定第一个神经元代表“叶子”，第二个神经元代表“花朵”。当神经网络的第一个神经元输出的数字大于第二个神经元输出的数字时，我们就说神经网络识别出当前的物体是“叶子”；反之，当第一个神经元输出的数字小于第二个神经元输出的数字时，我们就说神经网络识别出的当前物体是“花朵”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这两种方案都可以让神经网络识别物体是“叶子”还是“花朵”。但本文我们选择第二种方案，因为它的结构更容易适应后面我们要讲解的内容。以下是根据第二种方案设计出来的神经网络。让我们详细分析它：&lt;/p&gt;
+
+&lt;img src=&#34;pics/2.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;图中的圆圈代表神经网络中的神经元，每一竖排代表网络的一层。所有的数据从第一层进入，然后逐层逐个做乘法和加法计算，经过隐藏层（三个神经元），最终到达输出层（两个神经元），我们根据最后一层的两个神经元输出的数值来预测当前识别出的是什么物体。注意图中的箭头和数字，以及它们之间的乘法与加法关系。&lt;/p&gt;
+&lt;p&gt;蓝色圆圈中的数值计算过程如下：&lt;/p&gt;
+&lt;p&gt;(32 * 0.10) + (107 * -0.29) + (56 * -0.07) + (11.2 * 0.46) = -26.6&lt;/p&gt;
+&lt;p&gt;名词释义：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;神经元/节点&lt;/em&gt;：带数字的圆圈&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;权重&lt;/em&gt;：箭头线上标注的数字&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;层&lt;/em&gt;：一组（竖排）神经元称为一层。可以将这个网络看作有三层：4个神经元的输入层、3个神经元的中间层和2个神经元的输出层。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;要计算网络的预测/输出（又称作“前向传播”），从左侧开始，把“叶子”代表的数字填入到第一层的神经元中。要前进到下一层，将圆圈中的数字与对应神经元的权重相乘并相加。图中演示了蓝色和橙色圆圈的计算。运行整个网络后，输出层第一个数字较大，因此我们可以解释为“网络将这些（RGB, Vol）值分类为叶子”。经过良好训练的网络可以处理各种（RGB, Vol）输入并正确分类物体。&lt;/p&gt;
+&lt;p&gt;这个神经网络模型本身对“叶子”、“花朵”或（RGB, Vol）没有任何概念（即它不理解“叶子”和“花朵”是什么）。它被设计出来只是为了接收4个数字并输出2个数字。我们规定4个输入数字代表物体的颜色值和体积，同时也规定2个输出神经元的值如何对应“叶子”和“花朵”。最终，网络的权重会通过训练过程自动调整得到，以确保模型能够接收输入数字并输出符合我们解释的结果。&lt;/p&gt;
+&lt;p&gt;一个有趣的现象是，我们也可以用这个神经网络来预测未来一小时的天气情况。例如将云量和湿度等表示成4个不同的数字值作为输入，并将神经网络的最后输出解释为“1小时内晴天”或“1小时内下雨”。如果这个神经网络的权重校准良好，网络就可以同时完成分类叶子/花朵和预测天气的任务。我们的神经网络只是输出了两个数字，而这两个数字到底代表什么意思则完全取决于你对它的定义。例如：这两个数字可以代表对物体进行分类的结果或者预测天气等。&lt;/p&gt;
+&lt;p&gt;编写本小节时，为了让更多人理解，我省略了以下的一些技术术语。即使忽略这些术语，您依然可以理解神经网络的基本概念：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;激活层：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;神经网络通常有一层“激活层”，它对每个节点的计算结果应用一个非线性函数，以增强网络处理复杂情况的能力。一个常见的激活函数是 ReLU，它会将负数设为零，而正数保持不变。例如，在上例中，我们可以将隐藏层中的负数替换为零，然后再传递到下一层计算。没有激活层时，网络中的所有加法和乘法可以简化为单层。例如，绿色节点的输出可以直接写成 RGB 的加权和，不需要隐藏层。激活层的非线性特性使得神经网络能够处理更复杂的模式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;偏置：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;神经网络中的每个节点通常还关联一个“偏置”值，这个值会加到节点的加权和结果中，用于调整输出。例如，如果顶层蓝色节点的偏置是 0.25，那么计算公式变成：(32 * 0.10) + (107 * -0.29) + (56 * -0.07) + (11.2 * 0.46) + 0.25 = -26.35。偏置使得网络可以更灵活地拟合数据，“参数”通常指模型中的这些权重和偏置值。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Softmax：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在输出层，我们通常希望将结果转化为概率。Softmax 函数是一种常用的方法，它能将所有输出数值转换为概率分布（概率和为1）。Softmax 会将每个输出数值的指数除以所有输出值的指数和，使得输出层的结果可以被解读为各分类的概率。例如，如果 Softmax 处理后的值为 0.8 和 0.2，那么这表示 80% 的概率是“叶子”，20% 的概率是“花朵”。&lt;/p&gt;
+&lt;h2 id=&#34;2-如何训练这个神经网络模型&#34;&gt;2. 如何训练这个神经网络模型？&lt;/h2&gt;
+&lt;p&gt;在上例中，我们为了测试，给模型预设了合适的权重和偏置，这样才能得到准确的输出。但在实际应用中，权重和偏置值是如何获得的呢？获得合适的&amp;quot;权重&amp;quot;和&amp;quot;偏置&amp;quot;这个过程就称为“训练模型”或“训练神经网络”，也可理解为“人工智能的自我学习”；没错，这个过程就是“训练AI”。我们需要做的就是为模型提供优质数据来进行训练。&lt;/p&gt;
+&lt;p&gt;这里假设我们收集了一些数据，包括各种类型的“叶子”和“花朵”。然后，我们用工具将它们的颜色和体积转换成数字，给每个数据样本贴上“叶子”或“花朵”的标签（给数据取名字称为“标注数据”），最终这些数据组成了我们的“训练数据集”。&lt;/p&gt;
+&lt;p&gt;训练神经网络的工作原理如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;初始化权重&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;首先，从随机数开始，将神经元的每个参数/权重设为一个随机数。（启动训练程序时，计算机内存中未初始化的都是随机数，一般无须特别设定）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入数据并获得初始输出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们给神经网络输入“叶子”的数据表示（如 R=32，G=107，B=56，Vol=11.2），期望输出层第一个神经元的值大于第二个神经元的值，表示识别出“叶子”。假如预期“叶子”神经元的值是 0.8，代表“花”的神经元值是 0.2。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;计算损失&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于初始权重是随机的，实际输出往往和预期有差异。比如，两个神经元的初始输出分别是 0.6 和 0.4。我们可以通过求差并将差值平方相加计算损失：(0.8 - 0.6)&lt;sup&gt;2&lt;/sup&gt; + (0.2 - 0.4)&lt;sup&gt;2&lt;/sup&gt; = 0.04 + 0.04 = 0.08。理想情况下，我们希望损失接近于零，也就是“最小化损失”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;计算梯度并更新权重&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;计算每个权重对损失的影响（称为梯度），看向哪个方向调整才能减少损失。梯度指示了每个参数的变化方向——权重会朝损失减少的方向略微调整一点。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;重复迭代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;持续重复这些步骤，通过不断更新权重，使得损失逐步减少，最终得到一组“训练好的”权重或参数。这就是神经网络的训练过程，称为“梯度下降”。&lt;/p&gt;
+&lt;p&gt;补充说明&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多个训练样本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;训练中通常会使用多个样本。微调权重以最小化某个样本的损失可能会导致其他样本的损失增大。为了解决这个问题，通常会计算所有样本的平均损失，并基于平均损失的梯度来更新权重。每次完整的样本循环称为“一个 epoch”，多个 epoch 的训练可以帮助逐步找到更优的权重。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自动计算梯度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;实际上，无需手动微调权重来计算梯度，我们可以直接从数学公式推导出每个参数的最佳调整方向。例如，如果上一步权重为 0.17，且希望神经元的输出增大，那么将权重调整为 0.18 可能更有效。&lt;/p&gt;
+&lt;p&gt;在实践中，训练深度网络是一个复杂的过程，训练中可能会遇到梯度失控的情况，例如梯度值趋于零或趋向无穷大，这分别称为“梯度消失”和“梯度爆炸”问题。虽然上述的损失定义有效，但在实际应用中，通常会使用更适合特定任务的损失函数来提高训练效果。&lt;/p&gt;
+&lt;h2 id=&#34;3-神经网络怎样生成语言&#34;&gt;3. 神经网络怎样生成语言？&lt;/h2&gt;
+&lt;p&gt;神经网络只能接收输入一组数字，基于训练好的参数进行数学运算，最后输出另一组数字。关键在于如何解释这些数字，并通过训练来自动调整参数。如果我们能够把两组数字解释为“叶子/花朵”或“一小时后是晴天或雨天”，同样也可以将它们解释为“句子的下一个字符”。&lt;/p&gt;
+&lt;p&gt;但是，英文字母远不止两个，所以我们需要增加输出层的神经元数量，例如扩展到26个以上的神经元（再加上一些符号，如空格、句号等）。每个神经元对应一个字母或符号，然后我们在输出层中找出数值最大的神经元，并将其对应的字符作为输出字符。现在我们就有了一个可以接收输入并输出字符的网络。&lt;/p&gt;
+
+&lt;img src=&#34;pics/3.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;如果我们给神经网络输入“Humpty Dumpt”这个字符串，然后让它输出一个字符，并将其解释为“网络预测到的下一个字符”，我们可以通过训练，确保网络在收到这样的字符串“Humpty Dumpt”输入时输出字母“y”，从而达到我们想要的结果“Humpty Dumpty”。&lt;/p&gt;
+&lt;p&gt;不过，这里有一个问题：如何将字符串输入到网络中？毕竟，&lt;strong&gt;神经网络只接受数字&lt;/strong&gt;，通常实践中我们可以通过“one-hot编码”或其他编码方法将字符串转换成数值数组，使其可以被神经网络理解和处理。&lt;/p&gt;
+&lt;p&gt;这里我们采取一个最简单的解决方案来编码：直接为每个字符分配一个数字。例如，a=1，b=2，依此类推。现在我们可以输入“humpty dumpt”并训练网络输出“y”。网络的工作过程如下：先在神经网络的输入层输入一串句子（字符串），它将会在输出层预测下一个字符。这样的方法可以帮助我们构建完整的句子。例如，当我们预测出“y”后，可以将这个“y”添加到前面输入的字符串尾部，并再次送回神经网络的输入层，让它预测下一个字符。如果训练得当，网络会预测出一个空格；如此循环下去，最终生成出完整的句子：“Humpty Dumpty sat on a wall”。这样，我们就得到了一个生成式 AI（人工智能语言模型），神经网络就可以生成人类的自然语言了。当然，在实际应用中，例如chatGPT，不会使用这种简单的字符编号方法。在后文中，我们会介绍一种更合理的编码方式。&lt;/p&gt;
+&lt;p&gt;细心的读者可能会注意到，我们无法直接输入“Humpty Dumpty”，因为如图所示，输入层只有12个神经元，对应于“humpty dumpt”中的每个字符（包括空格），并没有多余的神经元留给字母‘y’输入了。那么，如何在下一步中加入“y”呢？如果在输入层加上第13个神经元，就需要重新调整整个网络，这显然不太现实。解决方案很简单：我们可以将最早的字符“h”剔除，保留最近的12个字符输入。例如，我们输入“umpty dumpty”，网络会预测出一个空格；然后我们输入“mpty dumpty ”，网络会输出“s”，如此循环下去，过程如下所示：&lt;/p&gt;
+
+&lt;img src=&#34;pics/4.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;这种方法有个问题，即当我们输入“ sat on the wal”时，会丢失之前的许多信息。那么，现代神经网络是如何解决的呢？原理都基本相似，神经网络的输入长度是固定的（取决于输入层的大小），这种长度称为“上下文长度”，即网络用来预测后续内容的参考范围。现代网络的上下文长度可以很长（通常达到几万甚至几十万个字符。例如，ChatGPT的4o模型支持12.8万个字符，Claude则支持25.6万个字符。这意味着它们在输入层中使用了超过10万个神经元来接收用户的输入），这对提升效果非常有帮助。尽管某些方法允许输入无限长度的序列，但固定上下文长度较大的模型在性能上会明显优于这些方法。&lt;/p&gt;
+&lt;p&gt;另外，细心的读者可能还会注意到，我们在输入和输出端对同一个字母的解释方式不同。比如，在输入“h”时我们用数字8表示它，但在输出层，我们并不直接要求模型输出数字8来代表“h”，而是生成26个数值，并选择其中最大值对应的字母作为输出。如果第8个数值最大，我们将其解释为“h”。为什么不在两端使用相同的表示方式呢？事实上，这是为了构建更有效的模型——不同的输入和输出解释方式为模型性能的提升提供了更多可能。实践表明，这种不同的表示方式对语言生成更有效。实际上，我们在输入端的数字表示方式也并非最佳，稍后会介绍更优的方法。&lt;/p&gt;
+&lt;h2 id=&#34;4-什么让大语言模型如此有效&#34;&gt;4. 什么让大语言模型如此有效？&lt;/h2&gt;
+&lt;p&gt;最早的模型通过逐字符生成&lt;code&gt;Humpty Dumpty sat on a wall&lt;/code&gt;，这与当前最先进的大型语言模型的功能相去甚远，但它却是这些先进模型的核心原理。通过一系列创新和改进，生成式AI从这种简单的形式演变为能够进行类人对话的机器人、AI客服、虚拟员工等，成为解决现实问题的强大工具。那么，当前的先进模型究竟在哪些方面做了改进呢？&lt;/p&gt;
+&lt;h2 id=&#34;5-嵌入-embeddings&#34;&gt;5. 嵌入 (Embeddings)&lt;/h2&gt;
+&lt;p&gt;还记得之前我们提到的输入字符方式并非最佳吗？之前随意给每个字符分配了一个数字。若是可以找到更合适的数字，或许可以训练出更好的网络。那么如何找到这些更好的数字呢？这里有个聪明的方法：&lt;/p&gt;
+&lt;p&gt;在前面的模型训练中，我们通过调整权重，观察最终损失是否减小来训练模型，不断调整权重。在每个步骤中，我们会：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;输入数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算输出层&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;与期望输出比较并计算平均损失&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调整权重，重新开始&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在这个过程中，输入是固定的，这在RGB和体积作为输入时是合理的。但现在的输入字符a、b、c等的数字是我们随意选定的。如果在每次迭代中，不仅调整权重，还调整输入表示法，看看用不同数字代表“a”能否降低损失呢？这确实可以减少损失，让模型变得更好（正是我们设计的方向）。不仅对权重应用梯度下降，对输入的数字表示也应用梯度下降，因为它们本身就是随意选择的数字，这被称为“嵌入”。它是一种输入到数字的映射，需要像参数一样进行训练。嵌入训练完成后，还可以在其他模型中复用。请注意，要始终用相同的嵌入表示同一符号/字符/词语。&lt;/p&gt;
+&lt;p&gt;我们讨论的嵌入只有每个字符一个数字。然而，实际应用中嵌入通常由多个数字组成，因为用单个数字难以表达一个概念的丰富性。回顾我们的叶子和花朵例子，每个物体有四个数（输入层的大小），这些数分别表达了物体的属性，模型可以有效利用这些数去识别物体。若只有一个数字，例如红色通道，模型可能会更难判断。要捕捉人类语言的复杂性，需要不止一个数字。&lt;/p&gt;
+&lt;p&gt;因此，我们可以用多个数字表示每个字符以捕捉更多丰富性吗？现在我们给每个字符分配一组数字，称之为“向量”（有顺序地排列每个数字，如果交换位置会变成不同的向量。比如在叶子和花朵的数据中，交换红色和绿色的数会改变颜色，得到不同的向量）。向量的长度即包含多少个数字。我们会给每个字符分配一个向量。这里有两个问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果给每个字符分配向量而非数字，如何将“humpty dumpt”输入到网络？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;答案很简单。假设我们为每个字符分配了10个数字的向量，那么输入层中12个神经元就变成120个神经元，因为“humpty dumpt”中的每个字符有10个数字。然后我们将神经元并排放好即可。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如何找到这些向量？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;幸运的是，我们刚刚学习了嵌入训练。训练嵌入向量与训练参数相似，只是现在有120个输入而不是12个，目标还是减少损失。在训练结束后，按顺序取前10个数就是对应“h”的向量，依此类推。&lt;/p&gt;
+&lt;p&gt;所有嵌入向量的长度必须相同，否则无法一致输入不同字符组合。比如“humpty dumpt”和“umpty dumpty”——两者都输入12个字符，若每个字符的向量长度不同，就无法输入到120长度的输入层。我们来看嵌入向量的可视化：&lt;/p&gt;
+
+&lt;img src=&#34;pics/5.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;我们可以称这组相同长度的向量为矩阵。上图的矩阵称为嵌入矩阵。你告诉它代表字符的列号，然后就可以矩阵中找到对应列即可获得表示该字符的向量。这种嵌入适用于嵌入任何事物集合，你只需为每个事物提供足够的列数。&lt;/p&gt;
+&lt;h2 id=&#34;6-子词分词器&#34;&gt;6. 子词分词器&lt;/h2&gt;
+&lt;p&gt;到目前为止，我们使用字符作为语言的基本构件，但这种方法有局限性。神经网络的权重必须做大量工作来理解某些字符序列（即单词）以及它们之间的关系。如果我们直接将嵌入分配给单词，并让网络预测下一个单词呢？反正网络也只理解数字，我们可以给“humpty”、“dumpty”、“sat”、“on”等单词分配一个10维向量，然后输入两个单词让它预测下一个。Token——指的是嵌入的单元，之前我们的模型使用单个字符作为token，现在提议用整个单词作为token（当然也可以用整个句子或短语作为token）。&lt;/p&gt;
+&lt;p&gt;使用单词分词对模型有深远影响。英语中有超过18万个单词，若每个可能输出都用一个神经元来表示，则输出层需要几十万个神经元，而不是26个左右。随着现代网络中隐藏层大小的增加，这一问题变得不那么棘手。需要注意的是，由于每个单词都是独立处理的，初始嵌入也用随机数表示，所以相似的单词（如“cat”和“cats”）的初始表示可能毫无关系。当然了，我们可以预期模型会学习到两个单词的相似性，但能否利用这个明显的相似性以加速并简化训练呢？&lt;/p&gt;
+&lt;p&gt;回答是可以的。今天的语言模型中最常用的嵌入方案是将单词分成子词并嵌入。例如，我们将“cats”分成两个token：“cat”和“s”。模型更容易理解其他词后的“s”的含义等。这也减少了token数量（sentencepiece是一种常用的分词器，词汇表大小为数万，而非英语中的几十万单词）。分词器将输入文本（如“Humpty Dumpt”）拆分为token并返回相应的数字，用于查找该token在嵌入矩阵中的向量。例如，“humpty dumpty”在字符级分词器下会拆成字符数组[‘h’,‘u’,…‘t’]，然后返回对应数字[8,21,…20]，因为你需要查找嵌入矩阵的第8列以获得‘h’的嵌入向量（注：输入模型的是嵌入向量，而不是数字8，与先前的操作完全不同）。矩阵列的排列无关紧要，给‘h’分配任何列都可以，只要每次输入‘h’时查找相同的向量就行。分词器给我们一个随意（但固定）的数字以便查找，而真正需要分词器的是将句子切分成token。&lt;/p&gt;
+&lt;p&gt;利用嵌入和子词分词，模型可能如下所示：&lt;/p&gt;
+
+&lt;img src=&#34;pics/6.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;接下来的几节涉及语言建模中的最新进展，正是它们让LLM如此强大。然而，理解这些之前需要掌握一些基础数学概念。以下是这些概念的总结：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;矩阵及矩阵乘法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数学中函数的基本概念&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数字的幂次方（比如：a&lt;sup&gt;3&lt;/sup&gt;=a*a*a）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;样本均值、方差和标准差&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;附录中有这些概念的总结。&lt;/p&gt;
+&lt;h2 id=&#34;7-自注意力机制&#34;&gt;7. 自注意力机制&lt;/h2&gt;
+&lt;p&gt;到目前为止，我们只讨论了一种简单的神经网络结构（称为前馈网络），这种网络包含若干层，每层都与下一层完全连接（即任何相邻层的两个神经元之间都有一条线），并且它仅连接到下一层（例如，层1和层3之间没有连接线）。然而可以想象，我们没有任何限制去移除或建立其他连接，甚至创建更复杂的结构。让我们来探讨一种特别重要的结构：自注意力机制。&lt;/p&gt;
+&lt;p&gt;观察人类语言的结构，我们想要预测的下一个词通常取决于前面的所有词。然而，它可能更依赖前面的某些词。例如，如果我们要预测“达米安有一个神秘孩子，是个女孩，他在遗嘱中写到他的所有财产，连同魔法球，都将归____”。此处填的词可以是“她”或“他”，具体取决于句子前面的这个词：女孩/男孩。&lt;/p&gt;
+&lt;p&gt;好消息是，我们的简单前馈模型可以连接到上下文中的所有词，因此它可以学习重要词的适当权重。但问题在于，通过前馈层连接特定位置的权重是固定的（对每个位置都是如此）。如果重要的词总是在同一个位置，它可以学习到适当的权重，那就没问题。然而，预测所需的相关词可以出现在系统的任何地方。我们可以将上面的句子进行改写，在猜“她还是他”时，无论出现在句子的哪个地方，男孩/女孩这个词都是非常重要的。所以我们需要让权重不仅依赖于位置，还依赖于该位置的内容。如何实现这一点？&lt;/p&gt;
+&lt;p&gt;自注意力机制的运作类似于对每个词的嵌入向量进行加权，但不是直接将它们相加，而是为每个词应用一些权重。例如，如果 humpty、dumpty、sat 的嵌入向量分别是 x&lt;sub&gt;1&lt;/sub&gt;、x&lt;sub&gt;2&lt;/sub&gt;、x&lt;sub&gt;3&lt;/sub&gt;，那么它会在相加之前将每个向量乘以一个权重（一个数值）。比如 output = 0.5 * x&lt;sub&gt;1&lt;/sub&gt; + 0.25 * x&lt;sub&gt;2&lt;/sub&gt; + 0.25 * x&lt;sub&gt;3&lt;/sub&gt;，其中 output 是自注意力的输出。如果我们将权重写作 u&lt;sub&gt;1&lt;/sub&gt;、u&lt;sub&gt;2&lt;/sub&gt;、u&lt;sub&gt;3&lt;/sub&gt;，那么 output = u&lt;sub&gt;1&lt;/sub&gt; * x&lt;sub&gt;1&lt;/sub&gt; + u&lt;sub&gt;2&lt;/sub&gt; * x&lt;sub&gt;2&lt;/sub&gt; + u&lt;sub&gt;3&lt;/sub&gt; * x&lt;sub&gt;3&lt;/sub&gt;，那么这些权重 u&lt;sub&gt;1&lt;/sub&gt;、u&lt;sub&gt;2&lt;/sub&gt;、u&lt;sub&gt;3&lt;/sub&gt; 是怎么得到的呢？&lt;/p&gt;
+&lt;p&gt;理想情况下，我们希望这些权重依赖于我们所加的向量——如前所述，有些词可能比其他词更重要。但对谁更重要呢？对我们即将预测的词更重要。因此，我们希望这些权重取决于我们即将预测的词。不过，这里有一个问题：在预测之前，我们当然不知道即将预测的词是什么。所以，自注意力机制采用紧接着我们将要预测的词的前一个词，即句子中当前可用的最后一个词（我不确定为什么是这样而不是其他词，不过深度学习中的许多事情都是通过反复试验得出的，我猜这是个有效的选择）。&lt;/p&gt;
+&lt;p&gt;好了，我们想要这些向量的权重，并且希望每个权重依赖于当前聚合的词和即将预测词的前一个词。基本上，我们想要一个函数 u&lt;sub&gt;1&lt;/sub&gt; = F(x&lt;sub&gt;1&lt;/sub&gt;, x&lt;sub&gt;3&lt;/sub&gt;)，其中 x&lt;sub&gt;1&lt;/sub&gt; 是我们要加权的词，x&lt;sub&gt;3&lt;/sub&gt; 是我们已有序列中的最后一个词（假设我们只有3个词）。一种直接的实现方法是为 x&lt;sub&gt;1&lt;/sub&gt; 定义一个向量（称为 k&lt;sub&gt;1&lt;/sub&gt;），为 x&lt;sub&gt;3&lt;/sub&gt; 定义一个独立的向量（称为 q&lt;sub&gt;3&lt;/sub&gt;），然后取它们的点积。这会得到一个数值，且它依赖于 x&lt;sub&gt;1&lt;/sub&gt; 和 x&lt;sub&gt;3&lt;/sub&gt;。那么，这些向量 k&lt;sub&gt;1&lt;/sub&gt; 和 q&lt;sub&gt;3&lt;/sub&gt; 是如何得到的？我们可以构建一个简单的单层神经网络，将 x&lt;sub&gt;1&lt;/sub&gt; 映射为 k&lt;sub&gt;1&lt;/sub&gt;（或者将 x&lt;sub&gt;2&lt;/sub&gt; 映射为 k&lt;sub&gt;2&lt;/sub&gt;，x&lt;sub&gt;3&lt;/sub&gt; 映射为 k&lt;sub&gt;3&lt;/sub&gt; 等）。同时构建另一个网络将 x&lt;sub&gt;3&lt;/sub&gt; 映射为 q&lt;sub&gt;3&lt;/sub&gt;，依此类推。使用矩阵表示法，我们基本上可以得到权重矩阵 W&lt;sub&gt;k&lt;/sub&gt; 和 W&lt;sub&gt;q&lt;/sub&gt;，使得 k&lt;sub&gt;1&lt;/sub&gt; = W&lt;sub&gt;k&lt;/sub&gt; * x&lt;sub&gt;1&lt;/sub&gt;，q&lt;sub&gt;1&lt;/sub&gt; = W&lt;sub&gt;q&lt;/sub&gt; * x&lt;sub&gt;1&lt;/sub&gt;，依此类推。现在我们可以对 k&lt;sub&gt;1&lt;/sub&gt; 和 q&lt;sub&gt;3&lt;/sub&gt; 进行点积得到一个标量，所以 u&lt;sub&gt;1&lt;/sub&gt; = F(x&lt;sub&gt;1&lt;/sub&gt;, x&lt;sub&gt;3&lt;/sub&gt;) = W&lt;sub&gt;k&lt;/sub&gt; * x&lt;sub&gt;1&lt;/sub&gt; · W&lt;sub&gt;q&lt;/sub&gt; * x&lt;sub&gt;3&lt;/sub&gt;。&lt;/p&gt;
+&lt;p&gt;在自注意力机制中，还有一个额外步骤，我们一般不会直接取嵌入向量的加权和，而是取该嵌入向量的某种“值”的加权和，这个“值”通过另一个小的单层网络获得。这意味着类似于 k&lt;sub&gt;1&lt;/sub&gt; 和 q&lt;sub&gt;1&lt;/sub&gt;，我们还需要一个 v&lt;sub&gt;1&lt;/sub&gt; 用于词 x&lt;sub&gt;1&lt;/sub&gt;，通过矩阵 W&lt;sub&gt;v&lt;/sub&gt; 得到，即 v&lt;sub&gt;1&lt;/sub&gt; = W&lt;sub&gt;v&lt;/sub&gt; * x&lt;sub&gt;1&lt;/sub&gt;。然后聚合这些 v&lt;sub&gt;1&lt;/sub&gt;。因此，若我们仅有3个词，并试图预测第4个词，整个过程看起来是这样的：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;译注：以上过程可抽象地理解成将 x&lt;sub&gt;1&lt;/sub&gt;, x&lt;sub&gt;2&lt;/sub&gt;, x&lt;sub&gt;3&lt;/sub&gt; 中某维度的特征通过与 W&lt;sub&gt;k&lt;/sub&gt;, W&lt;sub&gt;q&lt;/sub&gt;, W&lt;sub&gt;v&lt;/sub&gt; 矩阵相乘后被提取了出来，再通过向量点积计算出在该维度下的 x&lt;sub&gt;1&lt;/sub&gt;, x&lt;sub&gt;2&lt;/sub&gt;, x&lt;sub&gt;3&lt;/sub&gt; 相关性（结合向量点积的几何意义）。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;img src=&#34;pics/7.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;图中的加号表示向量的简单相加，意味着它们必须长度相同。最后一个未展示的修改是标量 u&lt;sub&gt;1&lt;/sub&gt;、u&lt;sub&gt;2&lt;/sub&gt;、u&lt;sub&gt;3&lt;/sub&gt; 等不一定加和为1。如我们需要它们作为权重，应该让它们加和为1。所以这里我们会应用熟悉的技巧，使用&lt;code&gt;softmax&lt;/code&gt;函数。&lt;/p&gt;
+&lt;p&gt;这就是自注意力。还有一种交叉注意力（cross-attention），可以将 q&lt;sub&gt;3&lt;/sub&gt; 来自最后一个词，但 k 和 v 可以来自完全不同的句子。例如，这在翻译任务中很有价值。现在我们已经大致了解了什么是注意力机制。&lt;/p&gt;
+&lt;p&gt;我们可以将这个整体封装成一个“自注意力块”。大体上讲，这个自注意力块接收嵌入向量并输出一个任意用户选择长度的单一向量。这个块通常有三个参数，W&lt;sub&gt;k&lt;/sub&gt;、W&lt;sub&gt;v&lt;/sub&gt;、W&lt;sub&gt;q&lt;/sub&gt;。机器学习文献中有许多这样类似的块，一般在图中用一个标注其名称的方框来表示。类似这样：&lt;/p&gt;
+
+&lt;img src=&#34;pics/8.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;现在可能你会注意到自注意力机制中的一个问题是——词的顺序似乎不那么重要。因为我们在整个过程中使用相同的 W 矩阵，所以交换 Humpty 和 Dumpty 并不会有实质差别——所有数值的结果都会相同。这意味着，虽然注意力可以识别需要关注的内容，但它不会依赖词的位置。不过我们知道词的位置在英语中很重要，通过给模型一些位置信息可以提高性能。&lt;/p&gt;
+&lt;p&gt;因此，在使用注意力机制时，我们通常不会直接将嵌入向量输入自注意力块。稍后我们将看到如何在输入注意力块之前，通过“位置编码”将位置信息添加到嵌入向量中。&lt;/p&gt;
+&lt;p&gt;注意：对于已经了解自注意力的人可能会注意到，我们没有提到任何 K 和 Q 矩阵，也没有应用掩码等。这是因为这些是模型常见训练方式的实现细节。数据批量输入，模型同时被训练预测从 humpty 到 dumpty、从humpty dumpty 到 sat 等等。这是为了提高效率，并不影响理解或模型输出，因此我们选择忽略了训练效率上的优化技巧。&lt;/p&gt;
+&lt;h2 id=&#34;8-softmax&#34;&gt;8. Softmax&lt;/h2&gt;
+&lt;p&gt;我们在最开始简要提到过 softmax。这是 softmax 试图解决的问题：在输出层中，我们有与可能选项数量相同的神经元，并且我们说将选择网络中值最高的神经元作为输出。然后我们会计算损失，方法是求网络提供的值和我们期望的理想值之间的差。但我们理想的值是什么呢？在叶子/花朵的例子中，我们设为0.8，但为什么是0.8？为什么不是5、10 或 1000万？理论上，越高越好！理想情况下，我们想要无穷大！不过这样会让问题变得不可解——所有的损失都将是无穷大，我们通过调整参数来最小化损失的计划（记得“梯度下降”吗）就失效了。该如何处理呢？&lt;/p&gt;
+&lt;p&gt;一个简单的方法是限制理想值在某个范围内，比如0到1之间。这样所有损失都会是有限的，但现在又出现了新问题：如果网络输出值超出这个范围怎么办？比如在某个例子中它输出 (5, 1) 表示（叶子, 花朵），而另一个例子输出 (0, 1)。第一个例子做出了正确的选择，但损失却更高。因此我们需要一种方法也将输出层的值转换到 (0, 1) 的范围内，同时保持大小关系不变。我们可以使用任何数学上的“函数”来实现这个目标（一种“函数”就是将一个数字映射到另一个数字的规则——输入一个数字，输出另一个数字），一个可行的选择是&lt;code&gt;逻辑函数&lt;/code&gt;（如下图所示），它将所有数字映射到 (0, 1) 之间，并保持顺序不变：&lt;/p&gt;
+
+&lt;img src=&#34;pics/9.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;现在，输出层中每个神经元都有一个0到1之间的数值，我们可以通过设定正确的神经元为1、其他为0 来计算损失，这样就可以比较网络输出与理想值的差异。这样能行，不过能不能更好一点？&lt;/p&gt;
+&lt;p&gt;回到我们“Humpty Dumpty”的例子，假设我们逐字生成“dumpty”，模型在预测“m”时出错了，输出层中最高的不是“m”而是“u”，但“m”紧随其后。如果我们继续用“duu”来预测下一个字符，模型的信心会很低，因为“humpty duu&amp;hellip;”后续可能性不多。然而，“m”是接近的次高值，我们可以也给“m”一个机会，预测接下来的字符，接着看后续结果如何？也许能给出一个更合理的词。&lt;/p&gt;
+&lt;p&gt;所以，我们这里谈到的不是盲目选择最大值，而是尝试几种可能性。怎么做才好呢？我们得给每个可能性一个概率——比如选最高的概率为50%，次高的为25%，依次类推。不过，或许我们还希望概率与模型的预测结果相关联。如果模型对 m 和 u 的预测值相当接近（相对其他值），那么 50:50 的机会可能会是不错的选择。&lt;/p&gt;
+&lt;p&gt;我们需要一个漂亮的规则，将这些数值转换为概率。softmax 就做了这个工作。它是上述逻辑函数的推广，但增加了一些特性。如果你输入10个任意数字，它会返回10个输出，每个在0到1之间，且总和为1，因此我们可以将它们解释为概率。因此你会发现，&lt;code&gt;softmax&lt;/code&gt;几乎在每个语言模型中作为最后一层出现。&lt;/p&gt;
+&lt;h2 id=&#34;9-残差连接&#34;&gt;9. 残差连接&lt;/h2&gt;
+&lt;p&gt;随着章节的进展，我们逐渐用方框/模块表示网络中的概念。这种表示法在描述“残差连接”这种有用概念时特别有效。让我们看看与自注意力块结合的残差连接：&lt;/p&gt;
+
+&lt;img src=&#34;pics/10.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：我们将“输入”和“输出”用方框表示，以简化内容，但它们仍然只是数字或神经元的集合。&lt;/p&gt;
+&lt;p&gt;这里发生了什么呢？在自注意力块的输出传递到下一个块之前，将它与原始输入相加。首先要注意的是，这要求自注意力块输出的维度必须与输入相同。这并不是问题，因为自注意力块的输出维度是用户确定的。但为什么要这样做呢？我们不会深入所有细节，这里关键是当网络层次加深（输入和输出之间的层数增加）时，训练难度会显著增加。研究表明，残差连接有助于缓解这些训练难题，并优化训练效果。&lt;/p&gt;
+&lt;h2 id=&#34;10-层归一化&#34;&gt;10. 层归一化&lt;/h2&gt;
+&lt;p&gt;层归一化是一个相对简单的层，它接收进入该层的数据，并通过减去均值并除以标准差来对数据进行归一化（可能还有更多的处理，如下文所示）。例如，如果我们在输入后立即应用层归一化，它将对输入层的所有神经元计算均值和标准差。假设均值为M，标准差为S，那么层归一化会将每个神经元的值替换为(X-M)/S，其中X表示任意神经元的原始值。&lt;/p&gt;
+&lt;p&gt;那这有什么帮助呢？它使得输入向量更加稳定（），有助于训练深层网络。一个问题是，通过归一化输入，我们是否会丢失一些可能对目标有帮助的有用信息？为了解决这个问题，层归一化层有一个“缩放”和一个“偏置”参数。基本上，对每个神经元，你可以乘以一个缩放值，然后加一个偏置。缩放和偏置值是可以训练的参数，允许网络学习到一些可能对预测有价值的变化。由于这是唯一的参数，层归一化块不需要大量参数进行训练。整个过程看起来大概是这样的：&lt;/p&gt;
+
+&lt;img src=&#34;pics/11.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;缩放和偏置都是可训练的参数。可以看到，层归一化是一个相对简单的块，操作主要是逐点进行（在初始均值和标准差计算之后）。让人联想到激活层（如ReLU），唯一不同的是这里我们有一些可训练参数（虽然比其他层要少很多，因为它是简单的逐点操作）。&lt;/p&gt;
+&lt;p&gt;标准差是一种统计指标，表示值的分布范围，例如，如果所有值都相同，则标准差为零。如果每个值都与均值相距甚远，标准差就会较高。计算一组数字 a&lt;sub&gt;1&lt;/sub&gt;, a&lt;sub&gt;2&lt;/sub&gt;, a&lt;sub&gt;3&lt;/sub&gt;…（假设有N个数字）的标准差的公式如下：将每个数字减去均值，然后将每个N个数字的结果平方，将所有这些数字相加，然后除以N，最后对结果开平方根。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;译注：层归一化的作用可简单理解为对数值进行缩放，经过神经网络运算后的输出结果数值上可能很大或者很小，经过层归一化之后，重新将他们收缩至正负1附近，并保持其大小关系不变。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;11-dropout&#34;&gt;11. Dropout&lt;/h2&gt;
+&lt;p&gt;Dropout 是一种简单而有效的方法来防止模型过拟合。过拟合是指当模型在训练数据上效果很好，但对模型未见过的示例泛化能力不佳。帮助避免过拟合的技术称为“正则化技术”，而 Dropout 就是其中之一。&lt;/p&gt;
+&lt;p&gt;如果你训练一个模型，它可能会在数据上产生错误，或以某种方式过拟合。如果你训练另一个模型，它可能也会产生错误，但方式不同。如果你训练多个模型并对它们的输出取平均值呢？这通常被称为“集成模型”，因为它通过组合多个模型的输出来进行预测，集成模型通常比任何单个模型表现更好。&lt;/p&gt;
+&lt;p&gt;在神经网络中，你也可以这么做。可以构建多个（略有不同的）模型，然后组合它们的输出以获得更好的模型。然而，这可能计算开销很大。Dropout 是一种不会实际构建集成模型的方法，但它捕捉到了一些集成模型的精髓。&lt;/p&gt;
+&lt;p&gt;概念很简单，通过在训练期间插入一个 Dropout 层，可以随机删除一定比例的神经元连接。以我们初始网络为例，在输入和中间层之间插入一个50%的 Dropout 层，可能看起来像这样：&lt;/p&gt;
+
+&lt;img src=&#34;pics/12.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;  style=&#34;border-bottom: 0; margin-bottom: 0;padding-bottom: 0;&#34;    /&gt;
+
+
+
+&lt;img src=&#34;pics/13.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;  style=&#34;border-top: 0; margin-top: 0;padding-top: 0; border-bottom: 0; margin-bottom: 0; padding-bottom: 0;&#34;    /&gt;
+
+
+
+&lt;img src=&#34;pics/14.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;  style=&#34;border-top: 0; margin-top: 0;padding-top: 0;&#34;    /&gt;
+
+
+&lt;p&gt;这迫使网络在大量冗余中进行训练。本质上，你同时训练了许多不同的模型——但它们共享权重。&lt;/p&gt;
+&lt;p&gt;在进行推断时，我们可以采用类似集成模型的方式。我们可以使用 Dropout 进行多次预测，然后组合结果。然而，这计算开销较大——而且由于模型共享权重——可以直接用所有权重进行预测（而不是每次只用50%的权重）？这应该能近似集成模型的效果。&lt;/p&gt;
+&lt;p&gt;不过有一个问题：用50%权重训练的模型与用全部权重的模型在中间神经元的数值上会有很大不同。我们想要的是更像集成模型的平均效果。如何实现呢？一个简单的方法是将所有权重乘以0.5，因为现在使用的权重数量是原来的两倍。这就是 Dropout 在推断期间所做的：使用全网络所有权重，并将权重乘以 (1-p)，其中 p 是删除的概率。研究表明，这作为一种正则化技术效果相当不错。&lt;/p&gt;
+&lt;h2 id=&#34;12-多头注意力&#34;&gt;12. 多头注意力&lt;/h2&gt;
+&lt;p&gt;这是 Transformer 架构中的关键模块。我们已经了解了什么是注意力模块。还记得吗？一个注意力模块的输出长度是由用户决定的，即向量 v 的长度。多头注意力就是在并行中运行多个注意力头（它们都接受相同的输入），然后将所有的输出简单地串联起来，看起来像这样：&lt;/p&gt;
+
+&lt;img src=&#34;pics/15.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;请注意，从 v&lt;sub&gt;1&lt;/sub&gt; -&amp;gt; v&lt;sub&gt;1&lt;/sub&gt;h&lt;sub&gt;1&lt;/sub&gt; 的箭头表示线性层——每条箭头上都有一个矩阵来进行转换。我这里没展示出来是为了避免图形过于复杂。&lt;/p&gt;
+&lt;p&gt;这里是为每个头生成相同的 key、query和value。但是我们基本上是在它们之上应用了线性变换（分别对每个 k、q、v 和每个头单独应用），然后才使用这些 k、q、v 的值。这个额外层在自注意力中并不存在。&lt;/p&gt;
+&lt;p&gt;说句题外话，我认为这种创建多头注意力的方法有点奇特。比如，为什么不给每个头创建独立的 W&lt;sub&gt;k&lt;/sub&gt;、W&lt;sub&gt;q&lt;/sub&gt;、W&lt;sub&gt;v&lt;/sub&gt; 矩阵，而是添加新的一层并共享这些权重？如果你知道原因，告诉我——我还真没弄明白。&lt;/p&gt;
+&lt;h2 id=&#34;13-位置编码与嵌入&#34;&gt;13. 位置编码与嵌入&lt;/h2&gt;
+&lt;p&gt;在自注意力部分，我们简要讨论了使用位置编码的动机。那这些是什么呢？虽然图中展示了位置编码，但使用位置嵌入比位置编码更为常见。因此，我们在此讨论常见的“位置嵌入”，但附录中也包含了原始论文中使用的“位置编码”。位置嵌入和其他嵌入没有区别，唯一不同的是这里不是对词汇表中的单词进行嵌入，而是对数字1、2、3等进行嵌入。因此，这种嵌入是一个与词汇嵌入同长度的矩阵，每一列对应一个数字。就是这么简单。&lt;/p&gt;
+&lt;h2 id=&#34;14-gpt-架构&#34;&gt;14. GPT 架构&lt;/h2&gt;
+&lt;p&gt;接下来谈谈 GPT 架构。大多数 GPT 模型（尽管有不同的变化）都使用这种架构。如果你跟着文章读到这里，这部分应该相对容易理解。使用框图表示法，这就是 GPT 架构的高级示意图：&lt;/p&gt;
+
+&lt;img src=&#34;pics/16.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;此时，除了“GPT Transformer 块”，其他模块我们都已详细讨论过。这里的+号只是表示两个向量相加（这意味着两个嵌入必须同样大小）。来看一下这个 GPT Transformer 块：&lt;/p&gt;
+
+&lt;img src=&#34;pics/17.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;就是这样。之所以称之为“Transformer”，是因为它源自并属于一种 Transformer 架构——我们将在下一节中详细了解。理解上没有影响，因为这里展示的所有模块我们都已讨论过。让我们回顾一下到目前为止构建这个 GPT 架构的过程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;了解到神经网络接收数字并输出其他数字，权重是可训练的参数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以对这些输入/输出数字进行解释，赋予神经网络现实世界的意义&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以串联神经网络创建更大的网络，并可以将每一个称为“块”，用框来表示以简化图解。每个块的作用都是接收一组数字并输出另一组数字&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;学习了很多不同类型的块，每种块都有其不同的作用&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;GPT 只是这些块的一个特殊排列，如上图所示，解释方式在第一部分已讨论过&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;随着时间的推移，人们在此基础上做出了各种修改，使得现代 LLM 更加强大，但基本原理保持不变。&lt;/p&gt;
+&lt;p&gt;现在，这个 GPT Transformer 实际上在原始 Transformer 论文中被称为“解码器”。让我们看看这一点。&lt;/p&gt;
+&lt;h2 id=&#34;15-transformer架构&#34;&gt;15. Transformer架构&lt;/h2&gt;
+&lt;p&gt;这是驱动语言模型能力迅速提升的关键创新之一。Transformer 不仅提高了预测准确性，还比先前的模型更高效（更容易训练），允许构建更大的模型。这是 GPT 架构的基础。&lt;/p&gt;
+&lt;p&gt;观察 GPT 架构，你会发现它非常适合生成序列中的下一个词。它基本遵循我们在第一部分讨论的逻辑：从几个词开始，然后逐个生成词。但是，如果你想进行翻译呢？比如，你有一句德语句子（例如“Wo wohnst du?” = “Where do you live?”），你希望将其翻译成英语。我们该如何训练模型来完成这项任务？&lt;/p&gt;
+&lt;p&gt;第一步，我们需要找到一种输入德语单词的方法，这意味着我们要扩展嵌入，包含德语和英语。我猜一种简单的输入方式是将德语句子和生成的英文句子连接起来，并将其输入上下文。为了让模型更容易理解，我们可以添加一个分隔符。每一步看起来像这样：&lt;/p&gt;
+
+&lt;img src=&#34;pics/18.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;这可以工作，但仍有改进空间：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果上下文长度固定，有时会丢失原始句子&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模型需要学习很多内容。包括两种语言，还需要知道是分隔符，它应该在此处开始翻译&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每次生成一个词时，都需要处理整个德语句子，存在不同偏移。这意味着相同内容的内部表示不同，模型应该能够通过这些表示进行翻译&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Transformer 最初就是为此任务创建的，它由“编码器”和“解码器”组成——基本上是两个独立的模块。一个模块仅处理德语句子，生成中间表示（仍然是数值集合）——这被称为编码器。第二个模块生成单词（我们已经见过很多）。唯一的区别是，除了将已生成的单词输入解码器外，还将编码器输出的德语句子作为额外输入。也就是说，在生成语言时，它的上下文是已生成的所有单词加上德语句子。这个模块被称为解码器。&lt;/p&gt;
+&lt;p&gt;这些编码器和解码器由一些块组成，尤其是夹在其他层之间的注意力块。我们来看“Attention is all you need”论文中的 Transformer 架构示意图并尝试理解它：&lt;/p&gt;
+
+&lt;img src=&#34;pics/19.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;左侧的竖直块集合称为“编码器”，右侧的称为“解码器”。让我们逐个理解每个部分：&lt;/p&gt;
+&lt;p&gt;前馈网络：前馈网络是没有循环的网络。第一部分中讨论的原始网络就是一个前馈网络。事实上，这个块采用了非常相似的结构。它包含两个线性层，每个层之后都有一个 ReLU（见第一部分关于 ReLU 的介绍）和一个 Dropout 层。这个前馈网络适用于每个位置独立。也就是说，位置0有一个前馈网络，位置1有一个，依此类推。但是位置x的神经元不会与位置y的前馈网络相连。这样做的重要性在于防止网络在训练时“偷看”前方信息。&lt;/p&gt;
+&lt;p&gt;交叉注意力：你会注意到解码器有一个多头注意力，其箭头来自编码器。这里发生了什么？记得自注意力和多头注意力中的 value、key、query 吗？它们都来自同一个序列。事实上，query 只是序列的最后一个词。那么，如果我们保留 query，但将 value 和 key 来自一个完全不同的序列会怎样？这就是这里发生的情况。value 和 key 来自编码器的输出。数学上没有任何改变，只是 key 和 value 的输入来源发生了变化。&lt;/p&gt;
+&lt;p&gt;Nx：Nx 表示这个块重复 N 次。基本上，你在将一个块层层堆叠，前一个块的输出作为下一个块的输入。这样可以使神经网络更深。从图上看，编码器输出如何传递给解码器可能让人困惑。假设 N=5。我们是否将每层编码器输出传递给对应的解码器层？不需要，实际上只需运行一次编码器，然后将同一表示提供给5个解码器层。&lt;/p&gt;
+&lt;p&gt;加与归一化块：这与下方相同（原论文作者似乎只是为了节省空间）&lt;/p&gt;
+
+&lt;img src=&#34;pics/20.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;其他内容我们已经讨论过。现在你已经完整理解了 Transformer 架构，从简单的加法和乘法操作一步步构建到现在的完整自包含解释！你知道如何从头构建 Transformer 的每一行、每一加法、每一块和每个单词的意义。如果你感兴趣，可以参看这个开源库&lt;a href=&#34;https://github.com/karpathy/nanoGPT&#34;&gt;nanoGPT&lt;/a&gt;，它从头实现了上述的 GPT 架构。&lt;/p&gt;
+&lt;h2 id=&#34;16-附录&#34;&gt;16. 附录&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;矩阵乘法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在嵌入部分中，我们引入了向量和矩阵的概念。矩阵有两个维度（行数和列数）。向量也可以看作一个只有一个维度的矩阵。两个矩阵的乘积定义为：&lt;/p&gt;
+
+&lt;img src=&#34;pics/21.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;点表示相乘。现在我们再看一下第一张图中蓝色和有机神经元的计算。如果我们将权重写成矩阵，输入作为向量，可以将整个运算表示如下：&lt;/p&gt;
+
+&lt;img src=&#34;pics/22.webp&#34;  alt=&#34;图片由作者提供&#34;  class=&#34;center&#34;    /&gt;
+
+
+&lt;p&gt;如果权重矩阵称为“W”，输入称为“x”，则 Wx 为结果（在此情况下是中间层）。我们也可以将两者转置写作xW——这是个人偏好的问题。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;标准差&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在层归一化部分，我们使用了标准差的概念。标准差是一个统计量，用于描述数值的分布范围（在一组数字中），例如，如果所有值都相同，则标准差为零。如果每个值都与这些值的均值相距很远，则标准差会很高。计算一组数字a&lt;sub&gt;1&lt;/sub&gt;, a&lt;sub&gt;2&lt;/sub&gt;, a&lt;sub&gt;3&lt;/sub&gt;…（假设有N个数字）的标准差的公式如下：将每个数字减去均值，然后将每个N个数字的结果平方，将所有这些数字相加，然后除以N，最后对结果开平方根。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;位置编码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们在上文中提到过位置嵌入。位置编码与嵌入向量长度相同，不同之处在于它不是嵌入，且无需训练。我们为每个位置分配一个独特的向量。例如，位置1是一个向量，位置2是另一个，以此类推。我们简单地为每个位置分配一个唯一的向量，例如，位置1的向量与位置2的向量不同，依此类推。一种简单的方法是将该位置的向量直接填充为位置编号。因此，位置1的向量为[1, 1, 1&amp;hellip;1]，位置2的向量为[2, 2, 2&amp;hellip;2]，以此类推（每个向量的长度必须与嵌入长度匹配，以使加法能够正常工作）。&lt;/p&gt;
+&lt;p&gt;但这种做法存在一个问题，即位置向量可能会得到一个较大的数，在训练过程中会带来挑战。当然，我们可以通过将每个数字除以位置的最大值来规范化这些向量，因此如果总共有3个单词，那么位置1的向量为[.33, .33, &amp;hellip; .33]，位置2的向量为[.67, .67, &amp;hellip; .67]，以此类推。但这又会带来一个新问题，因为我们不断地更改位置1的编码（当我们输入4个单词的句子时，这些数字会不同），使得网络训练变得困难。所以我们希望找到一种方案，给每个位置分配一个唯一的向量，并且数值不会过大。一般来说，如果上下文长度为d，并且嵌入向量的长度为10（假设），那么就需要一个10行和 d 列的矩阵，其中所有列的值都需要是唯一的，且所有数字都要在0和1之间。鉴于0和1之间有无数个数字，而矩阵的大小是有限的，这可以通过多种方式实现。在“Attention is all you need”论文中使用的方法为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;绘制10条正弦曲线，每条曲线为 si(p) = sin(p/10000&lt;sup&gt;(i/d)&lt;/sup&gt;)（即以10k的 i/d 次方为底）。填充编码矩阵，使得 (i, p) 位置的数字为 si(p)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;例如，对于位置1，编码向量的第5个元素为 s5(1)=sin(1/10000&lt;sup&gt;(5/d)&lt;/sup&gt;)。&lt;/p&gt;
+&lt;p&gt;通过改变10k的指数，可以在p轴上改变正弦函数的幅度。如果您有10个不同的正弦函数，具有10个不同的幅度，那么在改变p值时，直到重复（即所有10个值相同）将需要很长时间。这有助于获得唯一值。实际上，该论文同时使用正弦和余弦函数，编码形式为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;si(p) = sin(p/10000&lt;sup&gt;(i/d)&lt;/sup&gt;) 如果i为偶数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;si(p) = cos(p/10000&lt;sup&gt;(i/d)&lt;/sup&gt;) 如果i为奇数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;全文完&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://towardsdatascience.com/understanding-llms-from-scratch-using-middle-school-math-e602d27ec876&#34;&gt;原文连接&lt;/a&gt;&lt;/p&gt;
+</content>
     </item>
     
     <item>
-      <title>React Hook 简单体验</title>
+      <title>React Hooks 简单体验</title>
       <link>/posts/react-hook/</link>
-      <pubDate>Thu, 31 Oct 2024 23:00:00 +0800</pubDate>
+      <pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate>
       
       <guid>/posts/react-hook/</guid>
-      <description>&lt;h2 id=&#34;1-简介&#34;&gt;1. 简介&lt;/h2&gt;
-&lt;p&gt;一句话：让函数组件拥有类组件的能力。&lt;/p&gt;
+      <description>&lt;h3 id=&#34;1-简介&#34;&gt;1. 简介&lt;/h3&gt;
+&lt;p&gt;简而言之：让函数组件拥有类组件的能力。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;React&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyCount&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;React&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;state&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
@@ -154,7 +468,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        )
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由于无法函数组件没有&lt;code&gt;this&lt;/code&gt;，在React Hook出来之前无法实现&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由于无法函数组件没有 &lt;code&gt;this&lt;/code&gt;，在 React Hooks 出来之前无法实现&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyCountFunc&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; [ &lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;setCount&lt;/span&gt; ] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;useState&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);  &lt;span style=&#34;color:#75715e&#34;&gt;// Hook
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
@@ -165,10 +479,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; () =&amp;gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;clearInterval&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;interval&lt;/span&gt;);  &lt;span style=&#34;color:#75715e&#34;&gt;// callback
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    }, []);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-state-hooks&#34;&gt;2. State Hooks&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-state-hook&#34;&gt;2. State Hook&lt;/h3&gt;
 &lt;p&gt;两种API:&lt;/p&gt;</description>
-      <content>&lt;h2 id=&#34;1-简介&#34;&gt;1. 简介&lt;/h2&gt;
-&lt;p&gt;一句话：让函数组件拥有类组件的能力。&lt;/p&gt;
+      <content>&lt;h3 id=&#34;1-简介&#34;&gt;1. 简介&lt;/h3&gt;
+&lt;p&gt;简而言之：让函数组件拥有类组件的能力。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;React&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;react&amp;#39;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyCount&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;React&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;state&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
@@ -190,7 +504,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        )
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由于无法函数组件没有&lt;code&gt;this&lt;/code&gt;，在React Hook出来之前无法实现&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由于无法函数组件没有 &lt;code&gt;this&lt;/code&gt;，在 React Hooks 出来之前无法实现&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyCountFunc&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; [ &lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;setCount&lt;/span&gt; ] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;useState&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);  &lt;span style=&#34;color:#75715e&#34;&gt;// Hook
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
@@ -201,15 +515,17 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; () =&amp;gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;clearInterval&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;interval&lt;/span&gt;);  &lt;span style=&#34;color:#75715e&#34;&gt;// callback
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    }, []);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-state-hooks&#34;&gt;2. State Hooks&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-state-hook&#34;&gt;2. State Hook&lt;/h3&gt;
 &lt;p&gt;两种API:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;useState&lt;/li&gt;
 &lt;li&gt;useReducer&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;useState&lt;/code&gt; 是基于 &lt;code&gt;useReducer&lt;/code&gt; 实现，&lt;code&gt;useReducer&lt;/code&gt; 才是基础的State API.&lt;/p&gt;
-&lt;h3 id=&#34;1-usestate&#34;&gt;1. useState&lt;/h3&gt;
-&lt;p&gt;useState 返回值为一个数组 &lt;code&gt;[a, b]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;useState&lt;/code&gt; 是基于 &lt;code&gt;useReducer&lt;/code&gt; 实现，&lt;code&gt;useReducer&lt;/code&gt; 才是基础的 State API.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;useState&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;useState&lt;/code&gt; 返回值为一个数组 [a, b]&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; [ &lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;setCount&lt;/span&gt; ] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;useState&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;); &lt;span style=&#34;color:#75715e&#34;&gt;// 默认值只在初次渲染时有效，后续更新渲染初始值不起作用。
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;两种参数传入方式：&lt;/p&gt;
 &lt;ul&gt;
@@ -217,8 +533,10 @@
 &lt;li&gt;回调函数（避免于陷于闭包陷阱）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;setCount&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt; =&amp;gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-usereducer&#34;&gt;2. useReducer&lt;/h3&gt;
-&lt;p&gt;类似于 &lt;code&gt;Redux&lt;/code&gt;, 创建一个 &lt;code&gt;Reducer&lt;/code&gt; 函数，接收 &lt;code&gt;action&lt;/code&gt; .&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;useReducer&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;类似于 &lt;code&gt;Redux&lt;/code&gt;, 创建一个 &lt;code&gt;Reducer&lt;/code&gt; 函数，接收 action .&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyCountReducer&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;state&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;action&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt; ( &lt;span style=&#34;color:#a6e22e&#34;&gt;action&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt; ) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; {
@@ -240,7 +558,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;dispatchCount&lt;/span&gt;({ &lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;add&amp;#39;&lt;/span&gt; });
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}, &lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-effect-hook&#34;&gt;3. Effect Hook&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;3-effect-hook&#34;&gt;3. Effect Hook&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;useEffect&lt;/li&gt;
 &lt;li&gt;useLayoutEffect，会在组件挂载之前运行。&lt;/li&gt;
@@ -249,7 +567,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ...
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}, []);
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当数组中元素变换时，重新运行 &lt;code&gt;useEffect&lt;/code&gt; 函数，数组中的元素被称为依赖。&lt;/p&gt;
-&lt;h2 id=&#34;4-context-hook&#34;&gt;4. Context Hook&lt;/h2&gt;
+&lt;h4 id=&#34;4-context-hook&#34;&gt;4. Context Hook&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;use Context&lt;/li&gt;
 &lt;/ul&gt;
@@ -276,8 +594,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;{ &lt;span style=&#34;color:#a6e22e&#34;&gt;context&lt;/span&gt; }&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5-ref-hook&#34;&gt;5. Ref hook&lt;/h2&gt;
-&lt;p&gt;传统类组件可以通过添加&lt;code&gt;Ref&lt;/code&gt;字段来获取DOM对象，&lt;code&gt;string ref&lt;/code&gt; 17版本删掉&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;5-ref-hook&#34;&gt;5. Ref Hook&lt;/h4&gt;
+&lt;p&gt;传统类组件可以通过添加 Ref 字段来获取 DOM 对象，&lt;code&gt;string ref&lt;/code&gt; 17版本删掉&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ref&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;React&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;createRef&lt;/span&gt;()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;componentDidMount&lt;/span&gt;() {
@@ -298,25 +616,25 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;input&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ref&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{ &lt;span style=&#34;color:#a6e22e&#34;&gt;inputRef&lt;/span&gt; } /&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6-渲染优化&#34;&gt;6. 渲染优化&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;6-渲染优化&#34;&gt;6. 渲染优化&lt;/h4&gt;
 &lt;p&gt;必要优化点&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;memo&lt;/code&gt; 提供函数组件类似于类组件 &lt;code&gt;shouldComponentUpdate&lt;/code&gt; 对比变化函数。取决于函数参数是否存在变化&lt;/li&gt;
+&lt;li&gt;memo 提供函数组件类似于类组件 &lt;code&gt;shouldComponentUpdate&lt;/code&gt; 对比变化函数。取决于函数参数是否存在变化&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;memo&lt;/span&gt;(
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;component&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;&lt;code&gt;useMemo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;useMemo&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;useMemo&lt;/span&gt;(() =&amp;gt; {}, [&lt;span style=&#34;color:#a6e22e&#34;&gt;依赖注入&lt;/span&gt;])
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;&lt;code&gt;useCallback&lt;/code&gt; 简化使用版本的 &lt;code&gt;useMemo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;useCallback 简化使用版本的 useMemo&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;useCallback&lt;/span&gt;(() =&amp;gt; {}, [&lt;span style=&#34;color:#a6e22e&#34;&gt;依赖注入&lt;/span&gt;]);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7-闭包陷阱&#34;&gt;7. 闭包陷阱&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;7-闭包陷阱&#34;&gt;7. 闭包陷阱&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;useRef&lt;/code&gt; 来避免，因为每次返回的都是同一个对象&lt;/li&gt;
+&lt;li&gt;useRef 来避免，因为每次返回的都是同一个对象&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;() =&amp;gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (
