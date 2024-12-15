@@ -2,67 +2,67 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on VLVK&#39;s Blog</title>
-    <link>/tags/</link>
+    <link>https://blog.vlvk.site/tags/</link>
     <description>Recent content in Tags on VLVK&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vlvk.site/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LLM</title>
-      <link>/tags/llm/</link>
+      <link>https://blog.vlvk.site/tags/llm/</link>
       <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>/tags/llm/</guid>
+      <guid>https://blog.vlvk.site/tags/llm/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Neural-Network</title>
-      <link>/tags/neural-network/</link>
+      <link>https://blog.vlvk.site/tags/neural-network/</link>
       <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>/tags/neural-network/</guid>
+      <guid>https://blog.vlvk.site/tags/neural-network/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Self-Attention</title>
-      <link>/tags/self-attention/</link>
+      <link>https://blog.vlvk.site/tags/self-attention/</link>
       <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>/tags/self-attention/</guid>
+      <guid>https://blog.vlvk.site/tags/self-attention/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Transformer</title>
-      <link>/tags/transformer/</link>
+      <link>https://blog.vlvk.site/tags/transformer/</link>
       <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>/tags/transformer/</guid>
+      <guid>https://blog.vlvk.site/tags/transformer/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Frontend</title>
-      <link>/tags/frontend/</link>
+      <link>https://blog.vlvk.site/tags/frontend/</link>
       <pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>/tags/frontend/</guid>
+      <guid>https://blog.vlvk.site/tags/frontend/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>React</title>
-      <link>/tags/react/</link>
+      <link>https://blog.vlvk.site/tags/react/</link>
       <pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>/tags/react/</guid>
+      <guid>https://blog.vlvk.site/tags/react/</guid>
       <description></description>
       <content></content>
     </item>

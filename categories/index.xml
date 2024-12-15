@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on VLVK&#39;s Blog</title>
-    <link>/categories/</link>
+    <link>https://blog.vlvk.site/categories/</link>
     <description>Recent content in Categories on VLVK&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.vlvk.site/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI 科普</title>
-      <link>/categories/ai-%E7%A7%91%E6%99%AE/</link>
+      <link>https://blog.vlvk.site/categories/ai-%E7%A7%91%E6%99%AE/</link>
       <pubDate>Thu, 14 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>/categories/ai-%E7%A7%91%E6%99%AE/</guid>
+      <guid>https://blog.vlvk.site/categories/ai-%E7%A7%91%E6%99%AE/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>React Hooks</title>
-      <link>/categories/react-hooks/</link>
+      <link>https://blog.vlvk.site/categories/react-hooks/</link>
       <pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>/categories/react-hooks/</guid>
+      <guid>https://blog.vlvk.site/categories/react-hooks/</guid>
       <description></description>
       <content></content>
     </item>
